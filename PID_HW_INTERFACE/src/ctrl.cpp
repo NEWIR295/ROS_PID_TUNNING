@@ -100,14 +100,8 @@ void mororCtrl(void)
 /* if cytron motor driver used, set motor speed */
 void setSpeed(int pwm, int dirPin, int PwmPin)
 {
-    if (pwm > 0)
-    {
-        digitalWrite(dirPin, LOW);
-    }
-    else if (pwm < 0)
-    {
-        digitalWrite(dirPin, LOW);
-    }
+    digitalWrite(dirPin,HIGH);        
+    analogWrite(PwmPin,abs(pwm));
 }
 
 // update encoder
