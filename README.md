@@ -39,7 +39,7 @@ This directory includes the hardware interface code for motor control:
   - **L298**  
   - **Cytron**  
 - **Configuration File**: `ctrl.h`  
-  - Ensure to set proper parameters, such as **Pulses Per Revolution (PPR)**, based on the selected motor driver.  
+  - Ensure to set proper parameters, such as **Pulses Per Revolution (PPR)**, based on the selected encoder.  
 
 ---
 
