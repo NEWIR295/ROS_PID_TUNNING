@@ -20,8 +20,10 @@
 #define encoderB 3 //GREEN
 #define PPR 440.0
 
-//motor pins
-//Cytron motor driver pins
+enum motorDriver { CYTRON, L298N };
+#define MOTOR_DRIVER  L298N /* CYTRON or L298N */
+
+//motor driver pins
 #define pinDir 8// dir motor = Pin 8
 #define pinPwm 6 // PWM motor = Pin 9
 extern ros::NodeHandle nh; // Declare the nh object as external

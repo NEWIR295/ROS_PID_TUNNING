@@ -1,5 +1,5 @@
 /*
-  File Name: ctrl.h
+  File Name: ctrl.cpp
   Author: Mohamed Newir
   File Description: source file for the control unit
 */
@@ -68,20 +68,20 @@ void mororCtrl(void)
             double motorSpeed = double((encoderCount / PPR) * (2 * PI) * (1000.0 / interval)); // Revs per second to radians per second
             double motorSpeed_rpm = (motorSpeed * 60.0) / (2.0 * PI);
 
+#if (MOTOR_DRIVER == L298N)
             /*
                 if L298 motor driver is used
             */
-            digitalWrite(pinDir,HIGH);
+            digitalWrite(pinDir, HIGH);
             analogWrite(pinPwm, abs(inputPwm.data));
-
-            /* 
+            
+#elif (MOTOR_DRIVER == CYTRON)
+            /*
                 if cytron motor driver used
             */
-           
-            /*
-            setSpeed(inputPwm.data,pinDir,pinPwm); //set Motor with input speed.
-            */
 
+            setSpeed(inputPwm.data, pinDir, pinPwm); // set Motor with input speed.
+#endif
             /* publishing encoder angular velocity msgs for pid feedback */
             msg.data = motorSpeed_rpm;
             pub.publish(&msg);
@@ -100,11 +100,13 @@ void mororCtrl(void)
 /* if cytron motor driver used, set motor speed */
 void setSpeed(int pwm, int dirPin, int PwmPin)
 {
-    if(pwm > 0){
-        digitalWrite(dirPin,LOW);
-    }else if (pwm < 0)
+    if (pwm > 0)
     {
-        digitalWrite(dirPin,LOW);
+        digitalWrite(dirPin, LOW);
+    }
+    else if (pwm < 0)
+    {
+        digitalWrite(dirPin, LOW);
     }
 }
 
